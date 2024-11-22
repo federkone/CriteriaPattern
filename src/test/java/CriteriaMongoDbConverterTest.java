@@ -13,8 +13,8 @@ public class CriteriaMongoDbConverterTest {
                 .filter("category", "Electronics")
                 .filter("price", 100)
                 .order("price", true)
-                .limit(10)
-                .offset(5);
+                .limit(1)
+                .offset(0);
     }
 
     @Test

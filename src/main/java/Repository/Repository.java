@@ -4,6 +4,7 @@ import Criterios.CriteriaMysqlConverter;
 import modelos.Producto;
 import Criterios.Criteria;
 //import repository.ProductRepository;
+import io.github.cdimascio.dotenv.Dotenv;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,14 +14,14 @@ public class Repository implements IRepository {
     private List<Producto> productos;
     private Connection connection;
 
-    public Repository() {
-        this.connection = DriverManager.getConnection(dbUrl, username, password);
+    public Repository() throws SQLException {
+        Dotenv dotenv = Dotenv.load();
+        String url = dotenv.get("DB_URL");
+        String user = dotenv.get("DB_USER");
+        String password = dotenv.get("DB_PASSWORD");
+
+        this.connection = DriverManager.getConnection(url, user, password);
         productos = new ArrayList<>();
-        productos.add(new Producto("Laptop", "Electrónics", 1000, true));
-        productos.add(new Producto("Mouse", "Electrónics", 50, true));
-        productos.add(new Producto("Mesa", "Muebles", 200, false));
-        productos.add(new Producto("Silla", "Muebles", 100, true));
-        productos.add(new Producto("Teléfono", "Electrónics", 800, true));
     }
 
     @Override
@@ -28,7 +29,7 @@ public class Repository implements IRepository {
         try (Statement stmt = connection.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT * FROM products WHERE 1=1")) {
             while (rs.next()) {
-                productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getInt("price"), rs.getBoolean("available")));
+                productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getDouble("price"), rs.getBoolean("available")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,10 +43,11 @@ public class Repository implements IRepository {
         // String querySql = new CriteriaMysqlConverter().convert(criteria); //aqui se forma la consulta segun la infraestructura de la base de datos
         // hacer la consulta sql y meter los productos a una lista
         //retornar la lista
+        String querySql = new CriteriaMysqlConverter().convert(criteria); //aqui se forma la consulta segun la infraestructura de la base de datos
         try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(new CriteriaMysqlConverter().convert(criteria))) {
+             ResultSet rs = stmt.executeQuery(querySql)) {   //envio el query entregado por criteria
             while (rs.next()) {
-                productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getInt("price"), rs.getBoolean("available")));
+                productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getDouble("price"), rs.getBoolean("available")));
             }
         } catch (SQLException e) {
             e.printStackTrace();

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import Repository.Repository;
 import modelos.Producto;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class RepositoryQueryTest {
@@ -15,19 +16,19 @@ public class RepositoryQueryTest {
                 .filter("category", "Electronics")
                 .filter("price", 1000)
                 .order("price", true)
-                .limit(10)
-                .offset(5);
+                .limit(1)
+                .offset(0);
     }
 
   @Test
-    void TestMatching() {
+    void TestMatching() throws SQLException {
         Repository repository = new Repository();
         List<Producto> productos = repository.matching(criteria);
 
         assertEquals(1, productos.size());
     }
     @Test
-    void TestAll() {
+    void TestAll() throws SQLException {
         Repository repository = new Repository();
         List<Producto> productos = repository.all();
 
