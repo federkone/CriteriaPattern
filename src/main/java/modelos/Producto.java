@@ -1,10 +1,23 @@
 package modelos;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "products")
 public class Producto {
+    @Id
+    @Column(name = "name")
     private String nombre;
+
+    @Column(name = "category")
     private String categoria;
+
+    @Column(name = "price")
     private double precio;
+
+    @Column(name = "available")
     private boolean disponible;
+
+    public  Producto(){}
 
     public Producto(String nombre, String categoria, double precio, boolean disponible) {
         this.nombre = nombre;

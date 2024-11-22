@@ -23,7 +23,7 @@ public class CriteriaMongoDbConverterTest {
         String converterMongo = new CriteriaMongoDbConverter().convert(criteria);
        // String mongoQuery = converterMongo.convert(criteria);
 
-        String expectedMongo = "{\"query\": {\"category\": \"Electronics\", \"price\": 100}, \"options\": {\"sort\": {\"price\": 1}, \"limit\": 10, \"skip\": 5}}";
+        String expectedMongo = "{\"query\": {\"category\": \"Electronics\", \"price\": 100}, \"options\": {\"sort\": {\"price\": 1}, \"limit\": 1, \"skip\": 0}}";
         assertEquals(expectedMongo, converterMongo);
 
     }

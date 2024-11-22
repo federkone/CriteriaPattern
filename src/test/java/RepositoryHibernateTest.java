@@ -1,14 +1,16 @@
 import Criterios.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+import Repository.IRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import Repository.Repository;
+import Repository.RepositoryHibernate;
 import modelos.Producto;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class RepositoryQueryTest {
+public class RepositoryHibernateTest {
     Criteria criteria;
     @BeforeEach
     void setup(){
@@ -20,9 +22,9 @@ public class RepositoryQueryTest {
                 .offset(0);
     }
 
-  @Test
+    @Test
     void TestMatching() throws SQLException {
-        Repository repository = new Repository();
+        IRepository repository = new RepositoryHibernate();
         List<Producto> productos = repository.matching(criteria);
 
         assertEquals(1, productos.size());
@@ -30,7 +32,7 @@ public class RepositoryQueryTest {
     }
     @Test
     void TestAll() throws SQLException {
-        Repository repository = new Repository();
+        IRepository repository = new RepositoryHibernate();
         List<Producto> productos = repository.all();
 
         assertEquals(5, productos.size());
