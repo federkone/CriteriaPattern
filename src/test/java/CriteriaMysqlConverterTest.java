@@ -13,7 +13,6 @@ class CriteriaMysqlConverterTest {
         criteria = Criteria.create()
                 .filter("category", "Electronics")
                 .filter("price", 1000)
-                .filter("price", 1000)
                 .order("price", true)
                 .limit(1)
                 .offset(0);
