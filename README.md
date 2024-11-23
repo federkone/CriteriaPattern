@@ -28,9 +28,10 @@ List<Producto> productosMongodb = repositoryMongoDb.matching(criteria);
 ```java
 public List<Producto> matching(Criteria criteria) {
         String querySql = new CriteriaMysqlConverter("products").convert(criteria);
-        //CriteriaMysqlConverter retornará la traduccion al lenguaje:
+        /*CriteriaMysqlConverter retornará la traduccion al lenguaje:
          "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0"
-        //y aqui ejecutamos la consulta
+        */
+        y aqui ejecutamos la consulta
         return productos;
 }
 
