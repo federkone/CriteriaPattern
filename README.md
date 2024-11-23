@@ -1,3 +1,11 @@
+## Estado de proyecto
+
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
+![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
+
+
 ### Ejemplo de uso: Filtrado con Criteria y Repository
 
 ```java
@@ -64,4 +72,13 @@ public class RepositoryMongoDb implements IRepository {
         }
 }
 ```
-Podremos crear los traductores que necesitemos.
+
+Podremos crear los traductores que necesitemos.  
+
+![Atención](https://img.shields.io/badge/Atención-Importante-red)
+
+En los casos de utilizar Criteria api con hibernate no es necesario ya que hibernate ya tiene su propio traductor de Criteria a SQL.
+Esto es solo un ejemplo de como se podria implementar un traductor de Criteria a SQL y a MongoDb, HQL, etc. 
+El concepto principal es criteria como abstraccion de filtrados de busqueda.
+
+
