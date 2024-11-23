@@ -10,7 +10,11 @@ Criteria criteria = Criteria.create()
         .offset(0);                       // Iniciar en el primer resultado
 
 // Crear instancia del repositorio
-RepositorySql repository = new RepositorySql();
+IRepository repositorySql = new RepositorySql();
+IRepository repositoryMongodb = new RepositoryMongoDb();
 
 // Obtener la lista de productos que coincidan con los criterios
-List<Producto> productos = repository.matching(criteria); 
+List<Producto> productosSql = repositorySql.matching(criteria); 
+List<Producto> productosMongodb = repositoryMongoDb.matching(criteria);
+
+//Podemos observar que este diseño nos permite abstraernos de toda implementacion y de mantener el mismo formato de criterio para cualquier tipo de repositorio
