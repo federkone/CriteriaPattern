@@ -62,3 +62,5 @@ public class RepositoryMongoDb implements IRepository {
                 return productos;
         }
 }
+```
+Podremos crear los traductores que necesitemos.
