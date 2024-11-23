@@ -52,7 +52,7 @@ public class RepositoryMongoDb implements IRepository {
 
                 /*
                  CriteriaMongoDbConverter retornará la traduccion a un string compuesto que se usarán como lenguaje comun para mongoDb
-                {"query": {"category": "Electronics", "price": 100}, "options": {"sort": {"price": 1}, "limit": 1, "skip": 0}}
+                {"query": {"category": "Electronics", "price": 1000}, "options": {"sort": {"price": 1}, "limit": 1, "skip": 0}}
                 */
                 Document queryDocument = Document.parse(queryMongo);
                 Document query = queryDocument.get("query", Document.class);
