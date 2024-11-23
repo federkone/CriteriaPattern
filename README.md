@@ -82,6 +82,5 @@ Podremos crear los traductores que necesitemos.
 
 En los casos de utilizar Criteria api con hibernate no es necesario ya que hibernate ya tiene su propio traductor de Criteria a SQL.
 Esto es solo un ejemplo de como se podria implementar un traductor de Criteria a SQL y a MongoDb, HQL, etc. 
-El concepto principal es criteria como abstraccion de filtrados de busqueda.
 
 
