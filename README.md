@@ -14,6 +14,3 @@ RepositorySql repository = new RepositorySql();
 
 // Obtener la lista de productos que coincidan con los criterios
 List<Producto> productos = repository.matching(criteria); 
-
-// Imprimir los productos
-productos.forEach(System.out::println);
