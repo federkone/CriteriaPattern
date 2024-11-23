@@ -20,6 +20,7 @@ List<Producto> productosMongodb = repositoryMongoDb.matching(criteria);
 //Podemos observar que este diseño nos permite abstraernos de toda implementacion
 //y de mantener el mismo formato de criterio para cualquier tipo de repositorio
 
+```plaintext
 ### Ejemplo de uso: Filtrado con Criteria y Repository
 ```java
  String querySql = new CriteriaMysqlConverter("products").convert(criteria);
