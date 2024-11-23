@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 
 class CriteriaMysqlConverterTest {
     Criteria criteria;
-    Criteria criteria2;
 
     @BeforeEach
     void setup(){
@@ -24,7 +23,7 @@ class CriteriaMysqlConverterTest {
     void TestConvertCriteriaToSql() {
         String converterSql = new CriteriaMysqlConverter("products").convert(criteria);
 
-        String expected = "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0";
+        String expected = "SELECT * FROM products WHERE 1=1 AND category = ? AND price = ? ORDER BY price ASC LIMIT 1 OFFSET 0";
 
         System.out.println("Esperado: " + expected );
         System.out.println("Actual: " + converterSql);

@@ -1,6 +1,7 @@
 package Repository;
 
 import Criterios.CriteriaMysqlConverter;
+import Criterios.Filter;
 import Repository.HandleConections.ConnectionDbSqlNative;
 import modelos.Producto;
 import Criterios.Criteria;
@@ -23,27 +24,40 @@ public class RepositorySql implements IRepository {
     public List<Producto> all() {
         List<Producto> productos = new ArrayList<>();
         String querySql = "SELECT * FROM products";
-        return getProductos(productos, querySql);
+        return getProductos(productos, querySql, Criteria.create());
     }
 
     @Override
     public List<Producto> matching(Criteria criteria) {
         List<Producto> productos = new ArrayList<>();
-        String querySql = new CriteriaMysqlConverter("products").convert(criteria); //aqui se forma la consulta segun la infraestructura de la base de datos en este caso mysql
-        return getProductos(productos, querySql);
+        String querySql = new CriteriaMysqlConverter("products").convert(criteria); //aqui se forma el formato de consulta
+        return getProductos(productos, querySql, criteria);
     }
 
-    private List<Producto> getProductos(List<Producto> productos, String querySql) {
-        try (PreparedStatement stmt = connection.prepareStatement(querySql);
-             ResultSet rs = stmt.executeQuery()) {   //envio el query entregado por criteria
-            while (rs.next()) {
-                productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getDouble("price"), rs.getBoolean("available")));
+    private List<Producto> getProductos(List<Producto> productos, String querySql, Criteria criteria) {
+        try (PreparedStatement stmt = connection.prepareStatement(querySql)) {
+            int index = 1;  // El índice de los parámetros es 1-based
+            for (Filter filter : criteria.getFilters()) {
+                stmt.setObject(index++, filter.getValue());
+            }
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    productos.add(new Producto(
+                            rs.getString("name"),
+                            rs.getString("category"),
+                            rs.getDouble("price"),
+                            rs.getBoolean("available")
+                    ));
+                }
             }
         } catch (SQLException e) {
+            // Manejo de excepciones de SQL
             e.printStackTrace();
         }
+
         return productos;
     }
+
 
     public void insertData(Producto producto) {
         String sql = "INSERT INTO products (name, category, price, available) VALUES (?, ?, ?, ?)";

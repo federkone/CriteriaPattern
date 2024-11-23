@@ -1,9 +1,6 @@
 package Criterios;
 
 
-
-import java.util.Map;
-
 public class CriteriaMysqlConverter implements ICriteriaConverter {
     private final String tableName;
 
@@ -14,9 +11,9 @@ public class CriteriaMysqlConverter implements ICriteriaConverter {
     public String convert(Criteria criteria) {
         StringBuilder query = new StringBuilder("SELECT * FROM ").append(tableName).append(" WHERE 1=1");
 
-        // Agregar filtros
+        // Agregar filtros con parámetros
         for (Filter filter : criteria.getFilters()) {
-            query.append(" AND ").append(filter.getField()).append(" = '").append(filter.getValue()).append("'");
+            query.append(" AND ").append(filter.getField()).append(" = ?");
         }
 
         // Agregar orden
