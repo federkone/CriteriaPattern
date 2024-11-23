@@ -1,7 +1,7 @@
 ### Ejemplo de uso: Filtrado con Criteria y RepositorySql
 
 ```java
-// Crear criterios de búsqueda
+// Crear criterios de búsqueda, con todos los filtrios que deseamos aplicar "desde 0..n filtros"
 Criteria criteria = Criteria.create()
         .filter("category", "Electronics") // Filtrar por categoría
         .filter("price", 1000)             // Filtrar por precio
