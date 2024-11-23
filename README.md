@@ -55,7 +55,7 @@ public class RepositoryMongoDb implements IRepository {
                 {"query": {"category": "Electronics", "price": 100}, "options": {"sort": {"price": 1}, "limit": 1, "skip": 0}}
                 */
                 Document queryDocument = Document.parse(queryMongo);
-                Document query = queryDocument.get("query", Document.class);//tengo que extraer el query y options
+                Document query = queryDocument.get("query", Document.class);
                 Document options = queryDocument.get("options", Document.class);
 
                 //y aqui ejecutamos la consulta
