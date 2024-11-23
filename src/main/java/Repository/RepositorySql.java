@@ -22,23 +22,20 @@ public class RepositorySql implements IRepository {
     @Override
     public List<Producto> all() {
         List<Producto> productos = new ArrayList<>();
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT * FROM products WHERE 1=1")) {
-            while (rs.next()) {
-                productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getDouble("price"), rs.getBoolean("available")));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return productos;
+        String querySql = "SELECT * FROM products";
+        return getProductos(productos, querySql);
     }
 
     @Override
     public List<Producto> matching(Criteria criteria) {
         List<Producto> productos = new ArrayList<>();
         String querySql = new CriteriaMysqlConverter("products").convert(criteria); //aqui se forma la consulta segun la infraestructura de la base de datos en este caso mysql
-        try (Statement stmt = connection.createStatement();
-             ResultSet rs = stmt.executeQuery(querySql)) {   //envio el query entregado por criteria
+        return getProductos(productos, querySql);
+    }
+
+    private List<Producto> getProductos(List<Producto> productos, String querySql) {
+        try (PreparedStatement stmt = connection.prepareStatement(querySql);
+             ResultSet rs = stmt.executeQuery()) {   //envio el query entregado por criteria
             while (rs.next()) {
                 productos.add(new Producto(rs.getString("name"), rs.getString("category"), rs.getDouble("price"), rs.getBoolean("available")));
             }
