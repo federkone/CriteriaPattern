@@ -5,6 +5,9 @@
 ![License](https://img.shields.io/badge/License-GPL%20v3-blue.svg)
 ![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen)
 
+El patrón Criteria está diseñado para resolver el problema de la explosión de métodos en los repositorios al manejar múltiples combinaciones de consultas o filtros.
+Este patrón actúa como una capa de abstracción que permite definir criterios de búsqueda de forma flexible y reutilizable.
+Se utiliza como una capa adicional entre la lógica del negocio y la base de datos, asegurando que los criterios de búsqueda se definan de forma uniforme, portátil y extensible.
 
 ### Ejemplo de uso: Filtrado con Criteria y Repository
 
