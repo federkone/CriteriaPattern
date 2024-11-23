@@ -13,7 +13,10 @@ Criteria criteria = Criteria.create()
 RepositorySql repository = new RepositorySql();
 
 // Obtener la lista de productos que coincidan con los criterios
-List<Producto> productos = repository.matching(criteria);
+// ⬇ Aquí se traduce el criterio en una consulta SQL:
+List<Producto> productos = repository.matching(criteria); 
+// SELECT * FROM products WHERE 1=1 AND category = 'Electronics' 
+// AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0
 
 // Imprimir los productos
 productos.forEach(System.out::println);
