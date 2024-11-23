@@ -5,14 +5,18 @@ package Criterios;
 import java.util.Map;
 
 public class CriteriaMysqlConverter implements ICriteriaConverter {
+    private final String tableName;
 
+    public CriteriaMysqlConverter(String tableName) {
+        this.tableName = tableName;
+    }
     @Override
     public String convert(Criteria criteria) {
-        StringBuilder query = new StringBuilder("SELECT * FROM products WHERE 1=1");
+        StringBuilder query = new StringBuilder("SELECT * FROM ").append(tableName).append(" WHERE 1=1");
 
         // Agregar filtros
-        for (Map.Entry<String, Object> filter : criteria.getFilters().entrySet()) {
-            query.append(" AND ").append(filter.getKey()).append(" = '").append(filter.getValue()).append("'");
+        for (Filter filter : criteria.getFilters()) {
+            query.append(" AND ").append(filter.getField()).append(" = '").append(filter.getValue()).append("'");
         }
 
         // Agregar orden

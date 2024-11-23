@@ -6,49 +6,65 @@ import jakarta.persistence.*;
 public class Producto {
     @Id
     @Column(name = "name")
-    private String nombre;
+    private String name;
 
     @Column(name = "category")
-    private String categoria;
+    private String category;
 
     @Column(name = "price")
-    private double precio;
+    private double price;
 
     @Column(name = "available")
-    private boolean disponible;
+    private boolean available;
 
     public  Producto(){}
 
-    public Producto(String nombre, String categoria, double precio, boolean disponible) {
-        this.nombre = nombre;
-        this.categoria = categoria;
-        this.precio = precio;
-        this.disponible = disponible;
+    public Producto(String name, String category, double price, boolean available) {
+        this.name = name;
+        this.category = category;
+        this.price = price;
+        this.available = available;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public String getCategoria() {
-        return categoria;
+    public String getCategory() {
+        return category;
     }
 
-    public double getPrecio() {
-        return precio;
+    public double getPrice() {
+        return price;
     }
 
-    public boolean isDisponible() {
-        return disponible;
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
     }
 
     @Override
     public String toString() {
         return "Producto{" +
-                "nombre='" + nombre + '\'' +
-                ", categoria='" + categoria + '\'' +
-                ", precio=" + precio +
-                ", disponible=" + disponible +
+                "nombre='" + name + '\'' +
+                ", categoria='" + category + '\'' +
+                ", precio=" + price +
+                ", disponible=" + available +
                 '}';
     }
 }

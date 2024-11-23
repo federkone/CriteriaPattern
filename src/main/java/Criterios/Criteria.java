@@ -1,46 +1,27 @@
 package Criterios;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Criteria {
-    private Map<String, Object> filters;
+    private Set<Filter> filters;
     private String order;
     private Integer limit;
     private Integer offset;
 
     private Criteria() {
-        this.filters = new LinkedHashMap<>();
+        this.filters = new LinkedHashSet<>();
     }
 
     public static Criteria create() {
         return new Criteria();
     }
 
-    // Métodos de combinación lógicos estáticos
-    /*public static Criteria and(Criteria... criteria) {
-        Criteria combined = new Criteria();
-        for (Criteria c : criteria) {
-            combined.filters.putAll(c.filters);  // Combina los filtros de los Criteria pasados
-        }
-        return combined;
-    }*/
-
-    /*public static Criteria or(Criteria... criteria) {
-        Criteria combined = new Criteria();
-        // En este caso, para manejar el OR, necesitas manejar la lógica internamente o adaptarla
-        for (Criteria c : criteria) {
-            for (Map.Entry<String, Object> entry : c.filters.entrySet()) {
-                // Puedes manejar la lógica OR aquí
-                combined.filters.put(entry.getKey(), entry.getValue());
-            }
-        }
-        return combined;
-    }*/
+    //public void and(Criteria criteria2) {
+    //    this.filters.addAll(criteria2.getFilters());
+    //}
 
     public Criteria filter(String field, Object value) {
-        filters.put(field, value);
+        filters.add(new Filter(field, value));
         return this;
     }
 
@@ -59,8 +40,8 @@ public class Criteria {
         return this;
     }
 
-    public Map<String, Object> getFilters() {
-        return filters;
+    public Set<Filter> getFilters() {
+        return this.filters;
     }
 
     public String getOrder() {
@@ -74,4 +55,6 @@ public class Criteria {
     public Integer getOffset() {
         return offset;
     }
+
+
 }

@@ -1,13 +1,15 @@
+package Repository.HandleConections;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-public class ConnectionDb {
-    private final SessionFactory sessionFactory;
+public class ConnectionDbHibernate {
+    private SessionFactory sessionFactory;
 
-    public ConnectionDb() {
+    public ConnectionDbHibernate() {
         try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
+            sessionFactory = new Configuration().configure().buildSessionFactory(); //bildea la sesion con los parametros del archivo hibernate.cfg.xml
         } catch (Throwable ex) {
             throw new ExceptionInInitializerError(ex);
         }

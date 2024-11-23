@@ -4,28 +4,25 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-class CriteriaMysqlConverterTest {
+class CriteriaHQLConverterTest {
     Criteria criteria;
-    Criteria criteria2;
 
     @BeforeEach
     void setup(){
         criteria = Criteria.create()
                 .filter("category", "Electronics")
                 .filter("price", 1000)
-                .filter("price", 1000)
                 .order("price", true)
                 .limit(1)
                 .offset(0);
-
-
     }
 
     @Test
     void TestConvertCriteriaToSql() {
-        String converterSql = new CriteriaMysqlConverter("products").convert(criteria);
 
-        String expected = "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0";
+        String converterSql = new CriteriaHQLConverter("products").convert(criteria); //sobre la table/collection products se aplica el criterio y retorna la consulta sql
+
+        String expected = "FROM products p WHERE 1=1 AND p.category = :category AND p.price = :price ORDER BY p.price ASC";
 
         System.out.println("Esperado: " + expected );
         System.out.println("Actual: " + converterSql);

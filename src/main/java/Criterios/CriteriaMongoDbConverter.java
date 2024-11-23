@@ -11,8 +11,8 @@ public class CriteriaMongoDbConverter implements ICriteriaConverter {
         Document query = new Document();
 
         // Agregar filtros
-        for (Map.Entry<String, Object> filter : criteria.getFilters().entrySet()) {
-            query.append(filter.getKey(), filter.getValue());
+        for (Filter filter : criteria.getFilters()) {
+            query.append(filter.getField(), filter.getValue());
         }
 
         Document options = new Document();
