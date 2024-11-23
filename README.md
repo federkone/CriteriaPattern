@@ -1,4 +1,4 @@
-### Ejemplo de uso: Filtrado con Criteria y RepositorySql
+### Ejemplo de uso: Filtrado con Criteria y Repository
 
 ```java
 // Crear criterios de búsqueda, con todos los filtrios que deseamos aplicar "desde 0..n filtros"
