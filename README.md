@@ -32,7 +32,7 @@ public class RepositorySql implements IRepository {
         
                 /*
                   CriteriaMysqlConverter retornará la traduccion al lenguaje sql en formato string:
-                 "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0"
+                  "SELECT * FROM products WHERE 1=1 AND category = ? AND price = ? ORDER BY price ASC LIMIT 1 OFFSET 0"
                 */
         
                 //y aqui ejecutamos la consulta
