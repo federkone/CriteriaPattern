@@ -10,6 +10,6 @@ y buscamos obtener la lista de objetos"productos" que hagan match con los criter
 
         repository = new RepositorySql();
 
-         List<Producto> productos = repository.matching(criteria);
+        List<Producto> productos = repository.matching(criteria);
 
          
