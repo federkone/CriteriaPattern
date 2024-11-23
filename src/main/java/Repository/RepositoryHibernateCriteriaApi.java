@@ -24,21 +24,21 @@ public class RepositoryHibernateCriteriaApi implements IRepository {
     @Override
     public void insertData(Producto producto) {
         session.beginTransaction();
-        session.save(producto);
+        session.persist(producto);
         session.getTransaction().commit();
     }
 
     @Override
     public void deleteData(Producto producto) {
         session.beginTransaction();
-        session.delete(producto);
+        session.remove(producto);
         session.getTransaction().commit();
     }
 
     @Override
     public void updateData(Producto producto) {
         session.beginTransaction();
-        session.update(producto);
+        session.merge(producto);
         session.getTransaction().commit();
     }
 
@@ -68,8 +68,6 @@ public class RepositoryHibernateCriteriaApi implements IRepository {
             String field = filter.getField();
             Object value = filter.getValue();
 
-            // Aquí asumimos que todos los campos en el filtro son de tipo String
-            // Puedes adaptarlo según el tipo de cada campo
             predicate = cb.and(predicate, cb.equal(root.get(field), value));
         }
 
@@ -98,7 +96,7 @@ public class RepositoryHibernateCriteriaApi implements IRepository {
     private Order serializeOrder(String order, CriteriaBuilder criteriaBuilder, Root<Producto> root) {
         // Se divide la cadena del orden en dos partes: campo y dirección
         String[] orderParts = order.split(" ");
-        String field = orderParts[0];  // El campo por el que ordenar (ej. "price")
+        String field = orderParts[0];
         String direction = orderParts[1];  // La dirección (ASC o DESC)
 
         // Verificar si la dirección es ascendente o descendente y construir el objeto Order correspondiente
@@ -108,7 +106,7 @@ public class RepositoryHibernateCriteriaApi implements IRepository {
             return criteriaBuilder.desc(root.get(field));
         }
 
-        // Si la dirección no es válida, puedes lanzar una excepción o devolver un orden por defecto
+        // Si la dirección no es válida, lanzar una excepción o devolver un orden por defecto
         throw new IllegalArgumentException("Invalid order direction: " + direction);
     }
 }

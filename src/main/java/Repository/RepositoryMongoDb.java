@@ -63,7 +63,6 @@ public class RepositoryMongoDb implements IRepository {
             // Crear un objeto Producto y agregarlo a la lista
             productos.add(new Producto(nombre, categoria, precio, disponible));
         }
-        //todos los productos de una base de datos
         return productos;
     }
 

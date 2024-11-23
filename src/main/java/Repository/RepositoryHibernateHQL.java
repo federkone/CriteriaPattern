@@ -21,21 +21,21 @@ public class RepositoryHibernateHQL implements IRepository {
     @Override
     public void insertData(Producto producto) {
         session.beginTransaction();
-        session.save(producto);
+        session.persist(producto);
         session.getTransaction().commit();
     }
 
     @Override
     public void deleteData(Producto producto) {
         session.beginTransaction();
-        session.delete(producto);
+        session.remove(producto);
         session.getTransaction().commit();
     }
 
     @Override
     public void updateData(Producto producto) {
         session.beginTransaction();
-        session.update(producto);
+        session.merge(producto);
         session.getTransaction().commit();
     }
 

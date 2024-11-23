@@ -30,7 +30,6 @@ public class RepositorySql implements IRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        //todos los productos de una base de datos
         return productos;
     }
 
