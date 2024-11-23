@@ -21,8 +21,16 @@ List<Producto> productosMongodb = repositoryMongoDb.matching(criteria);
 //y de mantener el mismo formato de criterio para cualquier tipo de repositorio
 
 
- String querySql = new CriteriaMysqlConverter("products").convert(criteria);
 
 ```
-### Ejemplo de uso: Filtrado con Criteria y Repository
+### RepostiorySQL se encarga de traducir esos criterios al lenguaje de consulta sql:
 
+```java
+public List<Producto> matching(Criteria criteria) {
+        String querySql = new CriteriaMysqlConverter("products").convert(criteria);
+        //querySql en este caso contiene: "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0"
+        //la cual ahora usaremos para ejecutar la consulta
+        return productos;
+}
+
+```
