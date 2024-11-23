@@ -26,13 +26,36 @@ List<Producto> productosMongodb = repositoryMongoDb.matching(criteria);
 ### RepostiorySQL se encarga de traducir esos criterios al lenguaje de consulta sql:
 
 ```java
-public List<Producto> matching(Criteria criteria) {
-        String querySql = new CriteriaMysqlConverter("products").convert(criteria);
-        /*CriteriaMysqlConverter retornará la traduccion al lenguaje:
-         "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0"
-        */
-        y aqui ejecutamos la consulta
-        return productos;
+public class RepositorySql implements IRepository {
+        public List<Producto> matching(Criteria criteria) {
+                String querySql = new CriteriaMysqlConverter("products").convert(criteria);
+        
+                /*
+                  CriteriaMysqlConverter retornará la traduccion al lenguaje sql en formato string:
+                 "SELECT * FROM products WHERE 1=1 AND category = 'Electronics' AND price = '1000' ORDER BY price ASC LIMIT 1 OFFSET 0"
+                */
+        
+                //y aqui ejecutamos la consulta
+                return productos;
+        }
 }
 
 ```
+
+## RepositoryMongoDb se encarga de traducir los criterios a una consulta mongoDb
+
+```java
+
+public class RepositoryMongoDb implements IRepository {
+        public List<Producto> matching(Criteria criteria) {
+                 String queryMongo = new CriteriaMongoDbConverter().convert(criteria);
+
+                /*
+                 CriteriaMongoDbConverter retornará la traduccion a un string compuesto que se usarán como lenguaje comun para mongoDb
+                {"query": {"category": "Electronics", "price": 100}, "options": {"sort": {"price": 1}, "limit": 1, "skip": 0}}
+                */
+
+                //y aqui ejecutamos la consulta
+                return productos;
+        }
+}
