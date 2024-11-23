@@ -28,8 +28,8 @@ IRepository repositoryMongodb = new RepositoryMongoDb();
 List<Producto> productosSql = repositorySql.matching(criteria); 
 List<Producto> productosMongodb = repositoryMongoDb.matching(criteria);
 
-//Podemos observar que este diseño nos permite abstraernos de toda implementacion
-//y de mantener el mismo formato de criterio para cualquier tipo de repositorio
+/*Podemos observar que este diseño nos permite abstraernos de toda implementacion
+y de mantener el mismo formato de criterio para cualquier tipo de repositorio*/
 
 
 
