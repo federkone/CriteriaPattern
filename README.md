@@ -1,4 +1,4 @@
-## Estado de proyecto
+## Información
 
 ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
 ![Version](https://img.shields.io/badge/Version-1.0.0-blue)
