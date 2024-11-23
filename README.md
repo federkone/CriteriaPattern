@@ -1,6 +1,5 @@
-## Ejemplo de uso, donde creo un filtrado"criteria", utilizo el repositorioSQL
-## y buscamos obtener la lista de objetos"productos" que hagan match con los criterios definidos
- 
+### Ejemplo de uso: Filtrado con Criteria y RepositorySql
+
 ```java
 // Crear criterios de búsqueda
 Criteria criteria = Criteria.create()
