@@ -21,11 +21,11 @@ public class CriteriaMongoDbConverterTest {
     void TestCriteriaToMongoDb() {
 
         String converterMongo = new CriteriaMongoDbConverter().convert(criteria);
-       // String mongoQuery = converterMongo.convert(criteria);
 
         String expectedMongo = "{\"query\": {\"category\": \"Electronics\", \"price\": 100}, \"options\": {\"sort\": {\"price\": 1}, \"limit\": 1, \"skip\": 0}}";
+        assertEquals(expectedMongo, converterMongo);
+
         System.out.println("Esperado: " + expectedMongo );
         System.out.println("Actual: " + converterMongo);
-        assertEquals(expectedMongo, converterMongo);
     }
 }

@@ -3,7 +3,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-
 class CriteriaHQLConverterTest {
     Criteria criteria;
 
@@ -23,9 +22,9 @@ class CriteriaHQLConverterTest {
         String converterSql = new CriteriaHQLConverter("products").convert(criteria); //sobre la table/collection products se aplica el criterio y retorna la consulta sql
 
         String expected = "FROM products p WHERE 1=1 AND p.category = :category AND p.price = :price ORDER BY p.price ASC";
+        assertEquals(expected, converterSql);
 
         System.out.println("Esperado: " + expected );
         System.out.println("Actual: " + converterSql);
-        assertEquals(expected, converterSql);
     }
 }
