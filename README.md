@@ -34,7 +34,7 @@ y de mantener el mismo formato de criterio para cualquier tipo de repositorio*/
 
 
 ```
-### RepostiorySQL se encarga de traducir esos criterios al lenguaje de consulta sql:
+### RepostiorySQL usa CriteriaMysqlConverter para traducir esos criterios al lenguaje de consulta sql:
 
 ```java
 public class RepositorySql implements IRepository {
@@ -53,7 +53,7 @@ public class RepositorySql implements IRepository {
 
 ```
 
-## RepositoryMongoDb se encarga de traducir los criterios a una consulta mongoDb
+## RepositoryMongoDb usa CriteriaMongoDbConverter para traducir los criterios a una consulta mongoDb
 
 ```java
 
