@@ -48,10 +48,10 @@ public class RepositoryHibernateHQL implements IRepository {
     }
     public List<Producto> matching(Criteria criteria) {
             // Convertir Criteria a HQL
-             String hqlQuery = new CriteriaHQLConverter("Producto").convert(criteria);
+             String CriteriaQuery = new CriteriaHQLConverter("Producto").convert(criteria);
 
             // Ejecutar consulta hql
-            Query<Producto> query = session.createQuery(hqlQuery, Producto.class);
+            Query<Producto> query = session.createQuery(CriteriaQuery, Producto.class);
 
             for (Filter filter : criteria.getFilters()) {
                 query.setParameter(filter.getField(), filter.getValue());  //seteo de parametros con los valores de los filtros

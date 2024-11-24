@@ -42,55 +42,51 @@ public class RepositoryHibernateCriteriaApi implements IRepository {
         session.getTransaction().commit();
     }
 
-    // Método para obtener todos los productos
     public List<Producto> all() {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Producto> query = cb.createQuery(Producto.class);
-        Root<Producto> root = query.from(Producto.class);
-        query.select(root); // Selecciona todos los campos de Producto
-
-        // Ejecutar la consulta usando la Criteria API
-        Query<Producto> hqlQuery = session.createQuery(query);
-        return hqlQuery.getResultList();
+        Query<Producto> Query = createQuery(null);
+        return Query.getResultList();
     }
 
-    // Método para obtener productos según filtros, límite y desplazamiento
     public List<Producto> matching(Criteria criteria) {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
-        CriteriaQuery<Producto> query = cb.createQuery(Producto.class);
-        Root<Producto> root = query.from(Producto.class);
-
-        // Crear un Predicate para las condiciones de los filtros
-        Predicate predicate = cb.conjunction();  // Empieza con una condición 'verdadera'
-
-        // Agregar los filtros desde el objeto Criteria
-        for (Filter filter : criteria.getFilters()) {
-            String field = filter.getField();
-            Object value = filter.getValue();
-
-            predicate = cb.and(predicate, cb.equal(root.get(field), value));
-        }
-
-        query.where(predicate);
-
-        // Agregar orden
-        if (criteria.getOrder() != null) {
-            query.orderBy(serializeOrder(criteria.getOrder(), cb, root));
-        }
-
-        // Configurar límites y desplazamiento
-        Query<Producto> hqlQuery = session.createQuery(query);
+        Query<Producto> Query = createQuery(criteria);
 
         if (criteria.getLimit() != null) {
-            hqlQuery.setMaxResults(criteria.getLimit());
+            Query.setMaxResults(criteria.getLimit());
         }
 
         if (criteria.getOffset() != null) {
-            hqlQuery.setFirstResult(criteria.getOffset());
+            Query.setFirstResult(criteria.getOffset());
         }
 
-        // Ejecutar la consulta
-        return hqlQuery.getResultList();
+        return Query.getResultList();
+    }
+
+    private Query<Producto> createQuery(Criteria criteria) {
+        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaQuery<Producto> CriteriaQuery = cb.createQuery(Producto.class);
+        Root<Producto> root = CriteriaQuery.from(Producto.class);
+
+        if (criteria != null) {
+            // Crear un Predicate para las condiciones de los filtros
+            Predicate predicate = cb.conjunction();  // Empieza con una condición 'verdadera'
+
+            // Agregar los filtros desde el objeto Criteria
+            for (Filter filter : criteria.getFilters()) {
+                String field = filter.getField();
+                Object value = filter.getValue();
+
+                predicate = cb.and(predicate, cb.equal(root.get(field), value));
+            }
+
+            CriteriaQuery.where(predicate);
+
+            // Agregar orden
+            if (criteria.getOrder() != null) {
+                CriteriaQuery.orderBy(serializeOrder(criteria.getOrder(), cb, root));
+            }
+        }
+
+        return session.createQuery(CriteriaQuery);
     }
 
     private Order serializeOrder(String order, CriteriaBuilder criteriaBuilder, Root<Producto> root) {

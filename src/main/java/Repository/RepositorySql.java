@@ -28,18 +28,18 @@ public class RepositorySql implements IRepository {
 
     @Override
     public List<Producto> matching(Criteria criteria) {
-        String querySql = new CriteriaMysqlConverter("products").convert(criteria); //aqui se forma el formato de consulta
-        return getProductos(querySql, criteria);
+        String CriteriaQuery = new CriteriaMysqlConverter("products").convert(criteria); //aqui se forma el formato de consulta
+        return getProductos(CriteriaQuery, criteria);
     }
 
     private List<Producto> getProductos(String querySql, Criteria criteria) {
         List<Producto> productos = new ArrayList<>();
-        try (PreparedStatement stmt = connection.prepareStatement(querySql)) {
+        try (PreparedStatement statement = connection.prepareStatement(querySql)) {
             int index = 1;  // El índice de los parámetros es 1-based
             for (Filter filter : criteria.getFilters()) {
-                stmt.setObject(index++, filter.getValue());
+                statement.setObject(index++, filter.getValue());
             }
-            try (ResultSet rs = stmt.executeQuery()) {
+            try (ResultSet rs = statement.executeQuery()) {
                 while (rs.next()) {
                     productos.add(new Producto(
                             rs.getString("name"),
