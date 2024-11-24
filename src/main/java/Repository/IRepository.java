@@ -1,6 +1,6 @@
 package Repository;
-import Criterios.Criteria;
-import modelos.Producto;
+import Criteria.Criteria;
+import Models.Producto;
 
 import java.util.List;
 

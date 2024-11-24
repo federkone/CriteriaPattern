@@ -1,11 +1,11 @@
 package Repository;
 
-import Criterios.Criteria;
-import Criterios.CriteriaMongoDbConverter;
+import Criteria.Criteria;
+import Criteria.CriteriaMongoDbConverter;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.MongoCollection;
-import modelos.Producto;
+import Models.Producto;
 import Repository.HandleConections.ConnectionDbMongo;
 import org.bson.Document;
 

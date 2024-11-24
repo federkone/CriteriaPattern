@@ -1,4 +1,4 @@
-package Criterios;
+package Criteria;
 
 import java.util.Objects;
 

@@ -1,6 +1,4 @@
-package Criterios;
-
-import java.util.Map;
+package Criteria;
 
 public class CriteriaHQLConverter implements ICriteriaConverter{
     private final String tableName;

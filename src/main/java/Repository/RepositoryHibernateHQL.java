@@ -1,14 +1,13 @@
 package Repository;
-import Criterios.Criteria;
-import Criterios.CriteriaHQLConverter;
-import Criterios.Filter;
+import Criteria.Criteria;
+import Criteria.CriteriaHQLConverter;
+import Criteria.Filter;
 import Repository.HandleConections.ConnectionDbHibernate;
 import org.hibernate.Session;
-import modelos.Producto;
+import Models.Producto;
 import org.hibernate.query.Query;
 
 import java.util.List;
-import java.util.Map;
 
 //Aqui doy uso de HQL/String con hibernate para realizar consultas a la base de datos con filtros, orden, límite y desplazamiento segun mi clase Criteria/criterios para ello doy uso del CriteriaHQLConverter
 public class RepositoryHibernateHQL implements IRepository {

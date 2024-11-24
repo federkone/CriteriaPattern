@@ -1,10 +1,10 @@
 package Repository;
 
-import Criterios.CriteriaMysqlConverter;
-import Criterios.Filter;
+import Criteria.CriteriaMysqlConverter;
+import Criteria.Filter;
 import Repository.HandleConections.ConnectionDbSqlNative;
-import modelos.Producto;
-import Criterios.Criteria;
+import Models.Producto;
+import Criteria.Criteria;
 //import repository.ProductRepository;
 
 import java.util.ArrayList;

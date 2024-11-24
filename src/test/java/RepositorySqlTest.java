@@ -1,9 +1,9 @@
-import Criterios.*;
+import Criteria.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import Repository.IRepository;
-import modelos.Producto;
+import Models.Producto;
 import Repository.RepositorySql;
 
 import java.sql.SQLException;

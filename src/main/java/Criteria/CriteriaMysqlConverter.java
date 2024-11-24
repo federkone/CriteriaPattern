@@ -1,4 +1,4 @@
-package Criterios;
+package Criteria;
 
 
 public class CriteriaMysqlConverter implements ICriteriaConverter {

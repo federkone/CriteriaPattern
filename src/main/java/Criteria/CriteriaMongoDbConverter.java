@@ -1,7 +1,6 @@
-package Criterios;
+package Criteria;
 
 
-import java.util.Map;
 import org.bson.Document;
 
 public class CriteriaMongoDbConverter implements ICriteriaConverter {

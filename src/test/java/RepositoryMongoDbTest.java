@@ -1,8 +1,8 @@
-import Criterios.Criteria;
+import Criteria.Criteria;
 
 import Repository.IRepository;
 
-import modelos.Producto;
+import Models.Producto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.List;

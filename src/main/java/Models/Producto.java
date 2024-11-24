@@ -1,4 +1,4 @@
-package modelos;
+package Models;
 import jakarta.persistence.*;
 
 @Entity

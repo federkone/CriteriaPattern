@@ -1,12 +1,11 @@
-import Criterios.*;
+import Criteria.*;
 import static org.junit.jupiter.api.Assertions.*;
 import Repository.IRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import modelos.Producto;
+import Models.Producto;
 import Repository.RepositoryHibernateCriteriaApi;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class RepositoryHibernateCriteriaApiTest {
