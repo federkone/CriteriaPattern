@@ -62,7 +62,7 @@ public class RepositoryMongoDb implements IRepository {
                  String queryMongo = new CriteriaMongoDbConverter().convert(criteria);
 
                 /*
-                 CriteriaMongoDbConverter retornará la traduccion a un string compuesto que se usarán como lenguaje comun para mongoDb
+                 CriteriaMongoDbConverter retornará la traduccion a un json compuesto que se usarán como lenguaje comun para mongoDb
                 {"query": {"category": "Electronics", "price": 1000}, "options": {"sort": {"price": 1}, "limit": 1, "skip": 0}}
                 */
 
