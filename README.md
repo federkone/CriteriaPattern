@@ -81,6 +81,6 @@ Podremos crear los traductores que necesitemos.
 ![Atención](https://img.shields.io/badge/Atención-Importante-red)
 
 En los casos de utilizar Criteria api con hibernate no es necesario realizar un traductor ya que Criteria Api lo hace por su cuenta.
-Esto es solo un ejemplo de como se podria implementar un traductor de Criteria a SQL y a MongoDb, HQL, etc. 
+Esto es solo un ejemplo de como se podria implementar un traductor de Criteria a consulta SQL, Hql, MongoDb, etc. 
 
 
