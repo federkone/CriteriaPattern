@@ -10,8 +10,8 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 
-// Aqui doy uso de Criteria API de Hibernate para realizar consultas a la base de datos con filtros, orden, límite y desplazamiento segun mi clase Criteria/criterios ,
-// aqui no se usan Converters ya que se trata directamente con objetos gracias a la Criteria API
+// Aquí doy uso de Criteria API de Hibernate para realizar consultas a la base de datos con filtros, orden, límite y desplazamiento según mi clase Criteria/criterios ,
+// aquí no se usan Converters, ya que se trata directamente con objetos gracias a la Criteria API
 public class RepositoryHibernateCriteriaApi implements IRepository {
     private final Session session;
 
@@ -60,7 +60,7 @@ public class RepositoryHibernateCriteriaApi implements IRepository {
     }
 
     private Query<Producto> createQuery(Criteria criteria) {
-        CriteriaBuilder cb = session.getCriteriaBuilder(); //criteria api bilder
+        CriteriaBuilder cb = session.getCriteriaBuilder(); //criteria api builder
         CriteriaQuery<Producto> CriteriaQuery = cb.createQuery(Producto.class);
         Root<Producto> root = CriteriaQuery.from(Producto.class);
 

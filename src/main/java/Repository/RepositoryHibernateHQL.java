@@ -9,7 +9,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-//Aqui doy uso de HQL/String con hibernate para realizar consultas a la base de datos con filtros, orden, límite y desplazamiento segun mi clase Criteria/criterios para ello doy uso del CriteriaHQLConverter
+//Aquí doy uso de HQL/String con hibernate para realizar consultas a la base de datos con filtros, orden, límite y desplazamiento según mi clase Criteria/criterios para ello doy uso del CriteriaHQLConverter
 public class RepositoryHibernateHQL implements IRepository {
     private final Session session;
 
@@ -40,11 +40,11 @@ public class RepositoryHibernateHQL implements IRepository {
 
     @Override
     public List<Producto> all() {
-            // Ejecutar consulta nativa
             String hqlQuery = "FROM Producto";
             Query<Producto> query = session.createQuery(hqlQuery, Producto.class);
             return query.getResultList();
     }
+
     public List<Producto> matching(Criteria criteria) {
             // Convertir Criteria a HQL
              String CriteriaQuery = new CriteriaHQLConverter("Producto").convert(criteria);
@@ -56,7 +56,6 @@ public class RepositoryHibernateHQL implements IRepository {
                 query.setParameter(filter.getField(), filter.getValue());  //seteo de parametros con los valores de los filtros
             }
 
-            // Configurar límite y offset
             if (criteria.getLimit() != null) {
                 query.setMaxResults(criteria.getLimit());
             }

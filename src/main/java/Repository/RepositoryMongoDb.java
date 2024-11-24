@@ -15,15 +15,16 @@ import java.util.List;
 //Aqui doy uso de MongoQuery/string para realizar consultas a la base de datos mognoDb con filtros, orden, límite y desplazamiento
 //segun mi clase Criteria/criterios para ello doy uso del CriteriaMongoDbConverter para convertir los criterios a una consulta mongoDb
 public class RepositoryMongoDb implements IRepository {
-    private MongoDatabase database;
+    private final MongoDatabase database;
+    private final MongoCollection<Document> collection;
 
     public RepositoryMongoDb() {
         database = new ConnectionDbMongo().getDatabase();  //conectar a la base de datos
+        collection = database.getCollection("products"); //obtener coleccion
     }
 
     @Override
     public void insertData(Producto producto) {
-        MongoCollection<Document> collection = database.getCollection("products");
         Document doc = new Document("name", producto.getName())
                 .append("category", producto.getCategory())
                 .append("price", producto.getPrice())
@@ -33,14 +34,12 @@ public class RepositoryMongoDb implements IRepository {
 
     @Override
     public void deleteData(Producto producto) {
-        MongoCollection<Document> collection = database.getCollection("products");
         Document doc = new Document("name", producto.getName());
         collection.deleteOne(doc);
     }
 
     @Override
     public void updateData(Producto producto) {
-        MongoCollection<Document> collection = database.getCollection("products");
         Document filter = new Document("name", producto.getName());
         Document update = new Document("$set", new Document("category", producto.getCategory())
                 .append("price", producto.getPrice())
@@ -50,50 +49,37 @@ public class RepositoryMongoDb implements IRepository {
 
     @Override
     public List<Producto> all() {
-        List<Producto> productos =new ArrayList<>();
-        MongoCollection<Document> collection = database.getCollection("products");
         FindIterable<Document> result = collection.find();
-        for (Document doc : result) {
-            // Mapear el documento a un objeto Producto
-            String nombre = doc.getString("name");
-            String categoria = doc.getString("category");
-            Double precio = doc.getDouble("price");
-            boolean disponible = doc.getBoolean("available", false);
-
-            // Crear un objeto Producto y agregarlo a la lista
-            productos.add(new Producto(nombre, categoria, precio, disponible));
-        }
-        return productos;
+        return getProductos(result);
     }
 
     @Override
     public List<Producto> matching(Criteria criteria) {
-        List<Producto> productos =new ArrayList<>();
-        MongoCollection<Document> collection = database.getCollection("products");
-
         String queryMongo = new CriteriaMongoDbConverter().convert(criteria);  //obtengo consulta segun criteria
-        Document queryDocument = Document.parse(queryMongo);
 
-        Document query = queryDocument.get("query", Document.class);//tengo que extraer el query y options
+        Document queryDocument = Document.parse(queryMongo);
+        Document query = queryDocument.get("query", Document.class);//extraer query y options
         Document options = queryDocument.get("options", Document.class);
 
         FindIterable<Document> result = collection.find(query)
-                .sort(options.get("sort", Document.class)) //para ordenar
-                .limit(options.getInteger("limit",0)) //para limitar la cantidad de elementos
-                .skip(options.getInteger("skip",0));  //para saltar los primeros n elementos
+                .sort(options.get("sort", Document.class))
+                .limit(options.getInteger("limit",0))
+                .skip(options.getInteger("skip",0));
 
+        return getProductos(result);
+    }
+
+    private List<Producto> getProductos(FindIterable<Document> result) {
+        List<Producto> productos =new ArrayList<>();
         for (Document doc : result) {
             // Mapear el documento a un objeto Producto
-            String nombre = doc.getString("name");
-            String categoria = doc.getString("category");
-            Double precio = doc.getDouble("price");
-            boolean disponible = doc.getBoolean("available", false);
+            String name = doc.getString("name");
+            String category = doc.getString("category");
+            Double price = doc.getDouble("price");
+            boolean available = doc.getBoolean("available");
 
-            // Crear un objeto Producto y agregarlo a la lista
-            productos.add(new Producto(nombre, categoria, precio, disponible));  //serializo la respuesta para convertir a objetos
+            productos.add(new Producto(name, category, price, available));
         }
-
-
         return productos;
     }
 }

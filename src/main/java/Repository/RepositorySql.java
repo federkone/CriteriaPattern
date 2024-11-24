@@ -12,9 +12,9 @@ import java.util.List;
 import java.sql.*;
 
 //Aqui doy uso de SQL para realizar consultas a la base de datos con filtros, orden, límite y desplazamiento
-//segun mi clase Criteria/criterios para ello doy uso del CriteriaMysqlConverter para convertir los criterios a una consulta sql
+//segun mi clase Criteria/criterios para ello doy uso del CriteriaMysqlConverter para convertir a una consulta sql
 public class RepositorySql implements IRepository {
-    private Connection connection;
+    private final Connection connection;
 
     public RepositorySql() throws SQLException {
         this.connection = new ConnectionDbSqlNative().getConnection(); //conectar a la base de datos
