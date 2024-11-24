@@ -34,7 +34,7 @@ y de mantener el mismo formato de criterio para cualquier tipo de repositorio*/
 
 
 ```
-### RepostiorySQL usa CriteriaMysqlConverter para traducir esos criterios al lenguaje de consulta sql:
+### RepostiorySQL usa CriteriaMysqlConverter para traducir los criterios al lenguaje de consulta sql:
 
 ```java
 public class RepositorySql implements IRepository {
